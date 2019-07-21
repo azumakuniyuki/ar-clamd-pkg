@@ -6,6 +6,35 @@
 #  \___|_|\__,_|_| |_| |_|\__,_| || .__/|_|\_\__, | /_/   \__\__,_|___/_|\_\___/
 #                               \_\_|        |___/_/                            
 # boot-script
+- name: boot-script | RedHat | Service file for freshclam should be deployed
+  template:
+    src:   "usr/lib/systemd/system/clam-freshclam.service.j2"
+    dest:  "/usr/lib/systemd/system/clam-freshclam.service"
+    mode:  "0644"
+    owner: "root"
+    group: "root"
+
+- name: boot-script | freshclam should be enabled
+  when: clamd.enabled == true
+  service:
+    name:    "clam-freshclam"
+    enabled: "yes"
+
+- name: boot-script | RedHat | Service file for clamd should be deployed
+  notify: Restart clamd
+  template:
+    src:   "usr/lib/systemd/system/clamd.service.j2"
+    dest:  "/usr/lib/systemd/system/clamd.service"
+    mode:  "0644"
+    owner: "root"
+    group: "root"
+
+- name: boot-script | freshclam should be started
+  when: clamd.started == true
+  service:
+    name:  "clam-freshclam"
+    state: "started"
+
 - name: boot-script | Clamd should be enabled
   when: clamd.enabled == true
   service:
