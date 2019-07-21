@@ -1,0 +1,24 @@
+---
+#       _                     _  __      _       __     ___            _        
+#   ___| | __ _ _ __ ___   __| |/ /_ __ | | ____ \ \   / / |_ __ _ ___| | _____ 
+#  / __| |/ _` | '_ ` _ \ / _` | || '_ \| |/ / _` | | / /| __/ _` / __| |/ / __|
+# | (__| | (_| | | | | | | (_| | || |_) |   < (_| | |/ / | || (_| \__ \   <\__ \
+#  \___|_|\__,_|_| |_| |_|\__,_| || .__/|_|\_\__, | /_/   \__\__,_|___/_|\_\___/
+#                               \_\_|        |___/_/                            
+# install-pkg
+- block:
+    - name: install-pkg | RedHat | clamd should be installed
+      yum:
+        name:  "{{ item }}"
+        state: "present"
+      with_items:
+        - "clamav"
+        - "clamav-data"
+        - "clamav-devel"
+        - "clamav-lib"
+        - "clamav-scanner-systemd"
+        - "clamav-server-systemd"
+        - "clamav-update"
+        - "clamd"
+  when: ansible_os_family == "RedHat"
+
