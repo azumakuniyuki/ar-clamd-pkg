@@ -35,7 +35,7 @@
     - name: make-config | RedHat | Log Rotation should be configured
       template:
         src:   "etc/logrotate.d/clamav-update.j2"
-        dest:  "/etc/logrotate.d/clamav-update.j2"
+        dest:  "/etc/logrotate.d/clamav-update"
         mode:  "0644"
         owner: "root"
         group: "root"
@@ -43,7 +43,7 @@
     - name: make-config | RedHat | crontab should be deployed
       template:
         src:   "etc/cron.d/clamav-update.j2"
-        dest:  "/etc/cron.d/clamav-update.j2"
+        dest:  "/etc/cron.d/clamav-update"
         mode:  "0644"
         owner: "root"
         group: "root"
