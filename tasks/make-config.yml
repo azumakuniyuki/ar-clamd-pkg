@@ -15,6 +15,14 @@
         group: "virusgroup"
         state: "directory"
 
+    - name: make-config | RedHat | Runtime directory should be created
+      file:
+        path:  "{{ clamd.runtimedir }}"
+        mode:  "0775"
+        owner: "clamscan"
+        group: "virusgroup"
+        state: "directory"
+
     - name: make-config | RedHat | freshclam.conf should be deployed
       template:
         src:   "etc/freshclam.conf.j2"

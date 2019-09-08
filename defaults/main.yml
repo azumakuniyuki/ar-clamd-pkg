@@ -10,7 +10,8 @@ clamd:
   enabled: true
   started: true
   serverroot: "/var/lib/clamav"
-  loggingdir: "/var/log/clam"
+  loggingdir: "/var/log/clamav"
+  runtimedir: "/var/run/clamav"
   syslog:
     facility: "LOCAL6"
 

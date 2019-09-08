@@ -67,7 +67,7 @@ LogRotate yes
 # This option allows you to save a process identifier of the listening
 # daemon (main thread).
 # Default: disabled
-PidFile /var/run/clam/clamd.pid
+PidFile {{ clamd.runtimedir }}/clamd.pid
 
 # Optional path to the global temporary directory.
 # Default: system specific (usually /tmp or /var/tmp).
@@ -86,7 +86,7 @@ DatabaseDirectory {{ clamd.serverroot }}
 
 # Path to a local socket file the daemon will listen on.
 # Default: disabled (must be specified by a user)
-LocalSocket /var/run/clam/clamd.sock
+LocalSocket {{ clamd.runtimedir }}/clamd.sock
 
 # Sets the group ownership on the unix socket.
 # Default: disabled (the primary group of the user running clamd)
