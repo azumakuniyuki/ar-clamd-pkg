@@ -1,0 +1,55 @@
+---
+#       _                     _  __      _       __     ___            _        
+#   ___| | __ _ _ __ ___   __| |/ /_ __ | | ____ \ \   / / |_ __ _ ___| | _____ 
+#  / __| |/ _` | '_ ` _ \ / _` | || '_ \| |/ / _` | | / /| __/ _` / __| |/ / __|
+# | (__| | (_| | | | | | | (_| | || |_) |   < (_| | |/ / | || (_| \__ \   <\__ \
+#  \___|_|\__,_|_| |_| |_|\__,_| || .__/|_|\_\__, | /_/   \__\__,_|___/_|\_\___/
+#                               \_\_|        |___/_/                            
+# create-user
+- name: create-user | Group for clam users should be created
+  group:
+    name:  "{{ clamd.group.virusgroup.name }}"
+    gid:   "{{ clamd.group.virusgroup.gid }}"
+    state: "present"
+
+- name: create-user | clamscan user should be created
+  user:
+    createhome: "yes"
+    comment:    "{{ clamd.user.clamscan.comment }}"
+    password:   "{{ clamd.user.clamscan.password }}"
+    name:  "{{ clamd.user.clamscan.username }}"
+    uid:   "{{ clamd.user.clamscan.uid }}"
+    group: "{{ clamd.user.clamscan.group }}"
+    shell: "{{ clamd.user.clamscan.shell }}"
+    home:  "{{ clamd.user.clamscan.home }}"
+    state: "present"
+
+- name: create-user | clamupdate user should be created
+  user:
+    createhome: "yes"
+    comment:    "{{ clamd.user.clamupdate.comment }}"
+    password:   "{{ clamd.user.clamupdate.password }}"
+    name:  "{{ clamd.user.clamupdate.username }}"
+    uid:   "{{ clamd.user.clamupdate.uid }}"
+    group: "{{ clamd.user.clamupdate.group }}"
+    shell: "{{ clamd.user.clamupdate.shell }}"
+    home:  "{{ clamd.user.clamupdate.home }}"
+    state: "present"
+
+- name: create-user | clamscan directory should be readable from virtmail group
+  file:
+    path:  "{{ clamd.user.clamscan.home }}"
+    owner: "{{ clamd.user.clamscan.username }}"
+    group: "{{ clamd.user.clamscan.group }}"
+    mode:  "0770"
+    state: "directory"
+
+- name: create-user | clamd users should be included in virus group
+  user:
+    name:   "{{ item }}"
+    groups: "{{ clamd.group.virusgroup.name }}"
+    state:  "present"
+  with_items:
+    - "clamscan"
+    - "clamupdate"
+

@@ -9,9 +9,32 @@
 clamd:
   enabled: true
   started: true
-  serverroot: "/var/lib/clamav"
-  loggingdir: "/var/log/clamav"
-  runtimedir: "/var/run/clamav"
+  serverroot: "/var/lib/clam"
+  loggingdir: "/var/log/clam"
+  runtimedir: "/var/run/clam"
   syslog:
     facility: "LOCAL6"
+  user:
+    clamscan:
+      username: "clamscan"
+      password: null
+      group: "clamscan"
+      uid: "394"
+      gid: "394"
+      home: "/var/empty/clam"
+      shell: "/sbin/nologin"
+      comment: "Clamav Scanner User"
+    clamupdate:
+      username: "clamupdate"
+      password: null
+      group: "clamupdate"
+      uid: "395"
+      gid: "396"
+      home: "/var/lib/clam"
+      shell: "/sbin/nologin"
+      comment: "Clamav Database Update User"
+  group:
+    virusgroup:
+      name: "virusgroup"
+      gid:  "395"
 

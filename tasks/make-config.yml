@@ -7,6 +7,14 @@
 #                               \_\_|        |___/_/                            
 # make-config
 - block:
+    - name: make-config | RedHat | Server root directory should be created
+      file:
+        path:  "{{ clamd.serverroot }}"
+        mode:  "0755"
+        owner: "clamupdate"
+        group: "clamupdate"
+        state: "directory"
+
     - name: make-config | RedHat | Log directory should be created
       file:
         path:  "{{ clamd.loggingdir }}"
