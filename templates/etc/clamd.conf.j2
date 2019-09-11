@@ -94,7 +94,7 @@ LocalSocketGroup virusgroup
 
 # Sets the permissions on the unix socket to the specified mode.
 # Default: disabled (socket is world accessible)
-LocalSocketMode 660
+LocalSocketMode 666
 
 # Remove stale socket after unclean shutdown.
 # Default: yes
@@ -203,7 +203,7 @@ SelfCheck 1800
 
 # Run as another user (clamd must be started by root for this option to work)
 # Default: don't drop privileges
-User clamscan
+#User clamscan
 
 # Stop daemon when libclamav reports out of memory condition.
 ExitOnOOM yes
