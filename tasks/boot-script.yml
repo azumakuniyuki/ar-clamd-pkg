@@ -14,12 +14,6 @@
     owner: "root"
     group: "root"
 
-- name: boot-script | freshclam should be enabled
-  when: clamd.enabled == true
-  service:
-    name:    "clam-freshclam"
-    enabled: "yes"
-
 - name: boot-script | RedHat | Service file for clamd should be deployed
   notify: Restart clamd
   template:
@@ -28,12 +22,6 @@
     mode:  "0644"
     owner: "root"
     group: "root"
-
-- name: boot-script | freshclam should be started
-  when: clamd.started == true
-  service:
-    name:  "clam-freshclam"
-    state: "started"
 
 - name: boot-script | Clamd should be enabled
   when: clamd.enabled == true
